@@ -1,7 +1,7 @@
 {
-  "name": "boltil",
+  "name": "@boltdoggy/boltil",
   "version": "1.0.0",
-  "description": "",
+  "description": "> Bolt 工具箱",
   "main": "index.js",
   "scripts": {
     "docs": "docsify serve docs",
@@ -17,5 +17,19 @@
     "jest": "^23.6.0",
     "ts-jest": "^23.10.1",
     "typescript": "^3.0.3"
-  }
+  },
+  "directories": {
+    "doc": "docs",
+    "lib": "lib",
+    "test": "test"
+  },
+  "dependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BoltDoggy/Boltil.git"
+  },
+  "bugs": {
+    "url": "https://github.com/BoltDoggy/Boltil/issues"
+  },
+  "homepage": "https://github.com/BoltDoggy/Boltil#readme"
 }
