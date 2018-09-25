@@ -1,12 +1,13 @@
 {
   "name": "@boltdoggy/boltil",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "> Bolt 工具箱",
   "main": "index.js",
   "scripts": {
     "docs": "docsify serve docs",
     "clean": "rm -rf lib",
-    "build": "npm run clean && tsc src/**.ts --outDir lib",
+    "build": "npm run clean && tsc src/**.ts --outDir lib --lib es2015",
+    "prepublish": "npm run build",
     "test": "jest"
   },
   "author": "",
