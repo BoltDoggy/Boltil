@@ -1,0 +1,21 @@
+{
+  "name": "boltil",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "docs": "docsify serve docs",
+    "clean": "rm -rf lib",
+    "build": "npm run clean && tsc src/**.ts --outDir lib",
+    "test": "jest"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/jest": "^23.3.2",
+    "docsify-cli": "^4.2.1",
+    "jest": "^23.6.0",
+    "ts-jest": "^23.10.1",
+    "typescript": "^3.0.3"
+  }
+}
