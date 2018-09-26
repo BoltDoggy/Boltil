@@ -2,6 +2,29 @@
 
 > Bolt 工具箱
 
+## 使用
+
+```
+npm i @boltdoggy/boltil -S
+```
+
+```
+// example1
+import * as Boltil from '@boltdoggy/boltil'
+Boltil.debounceAsync(...)
+
+// example2
+import {
+  debounceAsync,
+  fetchOnce
+} from '@boltdoggy/boltil'
+debounceAsync(...)
+
+// example3
+import debounceAsync from '@boltdoggy/boltil/lib/debounceAsync'
+debounceAsync(...)
+```
+
 ## API
 
 ?> 以下图示中 `sn` 表示请求发出, `--` 表示等待返回, `en` 表示返回结果, ` ` 表示空闲等待.
