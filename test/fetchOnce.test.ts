@@ -1,6 +1,6 @@
 import fetchOnce from '../src/fetchOnce';
 
-import { aFetch } from './const';
+import { aFetch } from './const/index';
 
 test('do fetch 5 times', () => {
     expect.assertions(5);
