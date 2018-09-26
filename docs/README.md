@@ -8,7 +8,7 @@
 npm i @boltdoggy/boltil -S
 ```
 
-```
+``` js
 // example1
 import * as Boltil from '@boltdoggy/boltil'
 Boltil.debounceAsync(...)
@@ -58,6 +58,13 @@ s1------e1
 
 `f(...args)` 传入的参数 `...args` 将会原样传入原函数 `Function`
 
+``` js
+// example
+// aFetch 是一个普通的网络请求方法
+const aFetchDebounced = debounceAsync(aFetch);
+// 使用 aFetchDebounced(...) 取代 aFetch(...);
+```
+
 ### `f()` = fetchOnce(`Function`)
 
 只请求一次, 再次以及更多的请求忽略.
@@ -74,6 +81,15 @@ s1------e1
                         s9e1
 ```
 
+因为请求只发出一次, `f()` 传入参数也无法生效, 因此该方法不提供传入参数支持.
+
+``` js
+// example
+// aFetch 是一个普通的网络请求方法
+const aFetchOnce = debounceAsync(() => aFetch(...));
+// 使用 aFetchOnce() 取代 aFetch(...);
+```
+
 ### forEachAsync(`Array`, `StepFunction`, `DoneFunction`)
 
 按 `Array` 中元素顺序依次执行 `StepFunction(element, index, nextCallback)`
@@ -82,3 +98,14 @@ s1------e1
 - `index` 表示当前元素在 `Array` 中的位置
 - `nextCallback(err)` 在异步处理完成后调用
     - 如果 `err` 不为空, 则表示异常跳出, 不再使用 `Array` 的下一个元素执行 `StepFunction(...)`, 而是直接执行 `DoneFunction(err)`
+
+``` js
+// example
+forEachAsync([...], (element, index, next) => {
+  doSomeThingAsync(() => {
+    next();
+  });
+}, () => {
+  doSomeThing();
+})
+```
