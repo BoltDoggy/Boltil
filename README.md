@@ -86,7 +86,7 @@ s1------e1
 ``` js
 // example
 // aFetch 是一个普通的网络请求方法
-const aFetchOnce = debounceAsync(() => aFetch(...));
+const aFetchOnce = fetchOnce(() => aFetch(...));
 // 使用 aFetchOnce() 取代 aFetch(...);
 ```
 
