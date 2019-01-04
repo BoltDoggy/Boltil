@@ -27,7 +27,7 @@ debounceAsync(...)
 
 ## API
 
-?> 以下图示中 `sn` 表示请求发出, `--` 表示等待返回, `en` 表示返回结果, ` ` 表示空闲等待.
+> 以下图示中 `sn` 表示请求发出, `--` 表示等待返回, `en` 表示返回结果, ` ` 表示空闲等待.
 
 ```
 sn       ------en
@@ -65,7 +65,7 @@ const aFetchDebounced = debounceAsync(aFetch);
 // 使用 aFetchDebounced(...) 取代 aFetch(...);
 ```
 
-### `f()` = fetchOnce(`Function`)
+### `f()` = fetchOnce(`Function`, `RefreshSwitch = false`)
 
 只请求一次, 再次以及更多的请求忽略.
 
@@ -86,9 +86,54 @@ s1------e1
 ``` js
 // example
 // aFetch 是一个普通的网络请求方法
-const aFetchOnce = debounceAsync(() => aFetch(...));
+const aFetchOnce = fetchOnce(() => aFetch(...));
 // 使用 aFetchOnce() 取代 aFetch(...);
+// 或
+const anotherFetchOnce = fetchOnce(() => aFetch(...), true);
+// 使用 anotherFetchOnce() 取代 aFetch(...);
 ```
+
+#### 可选参数 RefreshSwitch
+
+默认为 false, 当主动传入 true 时, 表示第一次网络请求结束后, 再次调用会发起新的请求
+
+```
+s1------e1
+  s2    e1
+    s3  e1
+      s4e1
+        s5e1
+          s6e6
+            s7e6
+              s8e8
+                        s9e9
+```
+
+### `f()` = cacheFirst(`CacheKey`, `Function`, `RefreshSwitch = true`)
+
+缓存优先, 第一次请求, 在没有缓存的情况下, 请求正常发出.
+
+之后的请求发现本地缓存存在, 立即返回本地缓存数据, 同时请求发出, 返回后更新本地缓存.
+
+同时发出的网络请求参见 fetchOnce(`Function`, true) 的情况
+
+``` js
+// example
+// aFetch 是一个普通的网络请求方法
+const aCacheFirst = cacheFirst('aString', () => aFetch(...));
+// 使用 aCacheFirst() 取代 aFetch(...);
+// 或
+const anotherCacheFirst = cacheFirst('aString', () => aFetch(...), false);
+// 使用 anotherCacheFirst() 取代 aFetch(...);
+```
+
+#### 可选参数 RefreshSwitch
+
+默认为 true, 当主动传入 false 时, 表示不再更新本地缓存.
+
+即首次网络请求发出后, 不再发出网络请求.
+
+> 因为使用本地存储, 只有清空本地存储的情况才会更新数据, 请酌情慎用.
 
 ### forEachAsync(`Array`, `StepFunction`, `DoneFunction`)
 
