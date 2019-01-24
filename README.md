@@ -109,7 +109,7 @@ s1------e1
                         s9e9
 ```
 
-### `f()` = cacheFirst(`CacheKey`, `Function`, `RefreshSwitch = true`)
+### `f()` = cacheFirst(`[ CacheKey | CacheHandler ]`, `Function`, `RefreshSwitch = true`)
 
 缓存优先, 第一次请求, 在没有缓存的情况下, 请求正常发出.
 
@@ -124,6 +124,38 @@ const aCacheFirst = cacheFirst('aString', () => aFetch(...));
 // 使用 aCacheFirst() 取代 aFetch(...);
 // 或
 const anotherCacheFirst = cacheFirst('aString', () => aFetch(...), false);
+// 使用 anotherCacheFirst() 取代 aFetch(...);
+```
+
+#### CacheKey or CacheHandler
+
+使用 CacheKey, 传入 string, 作为 key, 并使用 [store](https://www.npmjs.com/package/store) 对本地存储操作
+
+使用 CacheHandler, 传入 object, 可以自定义对 Cache 的 getter, setter
+
+``` js
+// example
+// aFetch 是一个普通的网络请求方法
+const aCacheFirst = cacheFirst({
+  get() {
+    return /* */;
+  },
+  set(data) {
+    /* */;
+  }
+}, () => aFetch(...));
+// 使用 aCacheFirst() 取代 aFetch(...);
+// 更详细的例子
+const anotherCacheFirst = cacheFirst({
+  // 将缓存数据存储在临时属性 _data 中, 页面刷新后失效
+  _data: null,
+  get() {
+    return this._data;
+  },
+  set(data) {
+    this._data = data;
+  }
+}, () => aFetch(...));
 // 使用 anotherCacheFirst() 取代 aFetch(...);
 ```
 

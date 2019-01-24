@@ -13,11 +13,11 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@types/jest": "^23.3.2",
-    "docsify-cli": "^4.2.1",
+    "@types/jest": "^23.3.13",
+    "docsify-cli": "^4.3.0",
     "jest": "^23.6.0",
-    "ts-jest": "^23.10.1",
-    "typescript": "^3.0.3"
+    "ts-jest": "^23.10.5",
+    "typescript": "^3.2.4"
   },
   "directories": {
     "doc": "docs",

@@ -1,24 +1,20 @@
 import store from 'store';
 
-import fetchOnce from './fetchOnce';
+import _cacheFirst from './_cacheFirst';
 
-export default function (cacheKey, doFetch, refreshSwitch = true) {
-    const aFetchOnce = fetchOnce(doFetch, true);
+export default function (arg0, doFetch, refreshSwitch = true) {
+    if (typeof arg0 === 'string') {
+        const cacheKey = arg0;
 
-    return function () {
-        const ret = store.get(cacheKey);
-        if (ret) {
-            if (refreshSwitch) {
-                aFetchOnce().then((data) => {
-                    store.set(cacheKey, data);
-                });
-            }
-            return Promise.resolve(ret);
-        } else {
-            return aFetchOnce().then((data) => {
+        return _cacheFirst({
+            get() {
+                return store.get(cacheKey);
+            },
+            set(data) {
                 store.set(cacheKey, data);
-                return data;
-            });
-        }
+            }
+        }, doFetch, refreshSwitch);
+    } else {
+        return _cacheFirst(arg0, doFetch, refreshSwitch);
     }
 };
