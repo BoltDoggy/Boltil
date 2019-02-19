@@ -1,8 +1,8 @@
 {
   "name": "@boltdoggy/boltil",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "> Bolt 工具箱",
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
     "docs": "docsify serve docs",
     "clean": "rm -rf lib",
